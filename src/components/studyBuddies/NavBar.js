@@ -2,9 +2,6 @@ import React from "react";
 import {Image, Container, Nav, Navbar} from "react-bootstrap";
 import UserInfoMenu from "./UserInfoMenu";
 
-for (let i = 0; i < 10; i+2) {
-    console.log(i);
-}
 const NavBar = () => {
     return (
         <div>

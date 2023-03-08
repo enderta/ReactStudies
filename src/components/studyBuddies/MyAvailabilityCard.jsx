@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
+import NavBar from "./NavBar";
 import {Form, Modal} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 
 const MyAvailabilityCard = (props) => {
     const [edit, setEdit] = useState(false);
-    const trainees_id= useState(localStorage.getItem("id"));
+    const [trainees_id, setTrainees_id] = useState(localStorage.getItem("id"));
     const [date, setDate] = React.useState(new Date());
     const [topic, setTopic] = React.useState('');
 

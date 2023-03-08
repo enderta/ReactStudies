@@ -1,38 +1,113 @@
-.App {
-  text-align: center;
+*{
+  margin: 0;
+  padding: 0
+}
+#SvgjsG1489{
+  color: #D43C31;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+body, html{
+  width: 100%;
+  height: 100%;
+  background-color: black
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
+h2{
+  color:darkgreen;
+  font-size: 30px;
+}
+#root{
+  width: 100%;
+  height: 100%;
+  background: rgb(87,9,116);
+  background: linear-gradient(340deg, rgba(87,9,116,1) 48%, rgba(18,6,126,0.8323704481792717) 100%);
+}
+video{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 0;
+  float: left;
+  zIndex: -1;
+  padding: 0;
+  margin: 0;
+}
+.home_link1{
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 40px;
+  border: none;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+
+}
+.home_link2{
+  position: absolute;
+  top: 50%;
+  left: 75%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 40px;
+
+  border: none;
+
+
+
+}
+.pagination{
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  background: transparent;
+  box-sizing: border-box;
+  padding: 40px;
+  border: none;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  z-index: 1;
+}
+.home_link1_a{
+  color: #D43C31;
+  border: none;
+  text-decoration:none;
+  animation: blinker 1s step-start infinite;
+
+}
+.home_link2_a{
+  color: #31C9D4;
+  border:none;
+  text-decoration:none;
+  animation: animate 1.5s linear infinite;
+
+}
+.link_text2{
+  animation: animate 1s linear infinite;
+}
+.link_text1{
+  animation: animate 1s linear infinite;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@keyframes animate{
+  0%{
+    opacity: 0.5;
   }
-  to {
-    transform: rotate(360deg);
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0.5;
   }
 }
