@@ -39,20 +39,44 @@ app.post("/api/todo", async (req, res) => {
 });
 
 app.get("/api/todo", async (req, res) => {
+    const search = req.query.search;
+    const {task, duedate, status, priority} = req.body;
     try {
+        let todos;
         const allTodos = await pool.query("SELECT * FROM list");
-        res.status(200).json({
-            status: "success",
-            data: {
-                todos: allTodos.rows,
-            },
-        });
-    } catch (err) {
+        if (allTodos.rows.length === 0) {
+            return res.status(404).json({ error: "No todos found" });
+        }
+        if (!search) {
+            todos = await pool.query("SELECT * FROM list");
+            res.status(200).json({
+                status: "success",
+                data: {
+                    todos: todos.rows,
+                },
+            });
+        }
+        else {
+            todos = await pool.query(
+                //search by request body
+                "SELECT * FROM list WHERE task LIKE $1 OR duedate::text LIKE $2 OR status LIKE $3 OR priority LIKE $4",
+                [`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`]
+
+            );
+            res.status(200).json({
+                status: "success",
+                data: {
+                    todos: todos.rows,
+                },
+            });
+        }
+
+    }
+    catch (err) {
         console.error(err.message);
         res.status(500).json({ error: "Something went wrong" });
     }
 });
-
 app.get("/api/todo/:id", async (req, res) => {
     const { id } = req.params;
     try {
