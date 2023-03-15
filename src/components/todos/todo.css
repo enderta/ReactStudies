@@ -2,12 +2,15 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 0 auto;
+    margin: 10px auto;
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
     background: goldenrod;
 }
 button{
+    margin: 10px;
+}
+input{
     margin: 10px;
 }

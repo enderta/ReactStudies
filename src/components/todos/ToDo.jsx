@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import TodoCards from "./TodoCards";
-import {InputGroup} from "react-bootstrap";
-
+import "./todo.css"
 const ToDo = () => {
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState("");
@@ -34,8 +33,6 @@ const ToDo = () => {
                     setSearch(e.target.value);
                 }}
             />
-            <br/>
-            <br/>
             <div className="container">
                 <div className="row">
                     {todos.map((todo) => {
