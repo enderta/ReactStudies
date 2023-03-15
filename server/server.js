@@ -60,7 +60,7 @@ app.get("/api/todo", async (req, res) => {
             todos = await pool.query(
                 // duedate::text in the query inside the else block to cast the
                 // duedate column as text so that we can search for it using the LIKE operator.
-                "SELECT * FROM list WHERE task LIKE $1 OR duedate::text LIKE $2 OR status LIKE $3 OR priority LIKE $4",
+                "SELECT * FROM list WHERE task LIKE $1 OR duedate::text LIKE $2 OR status LIKE $3 OR priority LIKE $4 sort by duedate asc",
                 [`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`]
 
             );
