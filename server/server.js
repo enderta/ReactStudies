@@ -37,47 +37,59 @@ app.post("/api/todo", async (req, res) => {
         res.status(500).json({ error: "Something went wrong" });
     }
 });
-
+const PAGE_SIZE = 6;
 app.get("/api/todo", async (req, res) => {
-    const search = req.query.search;
-    const {task, duedate, status, priority} = req.body;
-    try {
-        let todos;
-        const allTodos = await pool.query("SELECT * FROM list");
-        if (allTodos.rows.length === 0) {
-            return res.status(404).json({ error: "No todos found" });
-        }
-        if (!search) {
-            todos = await pool.query("SELECT * FROM list");
+    const { page } = req.query;
+    const search = req.query.search || "";
+    const sort = req.query.sort || "created_at";
+    const order = req.query.order || "desc";
+    const offset = isNaN(parseInt(page)) ? 0 : (parseInt(page) - 1) * PAGE_SIZE;
+    if (!search) {
+        try {
+            const todos = await pool.query(
+                `SELECT * FROM list ORDER BY ${sort} ${order} LIMIT $1 OFFSET $2`,
+                [PAGE_SIZE, offset]
+            );
+            const total = await pool.query("SELECT COUNT(*) FROM list");
             res.status(200).json({
                 status: "success",
                 data: {
                     todos: todos.rows,
+                    total: total.rows[0].count,
+                    page: page,
+                    pages: Math.ceil(total.rows[0].count / PAGE_SIZE),
                 },
             });
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).json({ error: "Something went wrong" });
         }
-        else {
-            todos = await pool.query(
-                // duedate::text in the query inside the else block to cast the
-                // duedate column as text so that we can search for it using the LIKE operator.
-                "SELECT * FROM list WHERE task LIKE $1 OR duedate::text LIKE $2 OR status LIKE $3 OR priority LIKE $4 ORDER BY duedate ASC",
+    } else {
+        try {
+            const todos = await pool.query(
+                `SELECT * FROM list WHERE task ILIKE $1 OR duedate::text ILIKE $2 OR status ILIKE $3 OR priority ILIKE $4 ORDER BY ${sort} ${order} LIMIT ${PAGE_SIZE} OFFSET ${offset}`,
                 [`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`]
-
+            );
+            const total = await pool.query(
+                `SELECT COUNT(*) FROM list WHERE task ILIKE $1 OR duedate::text ILIKE $2 OR status ILIKE $3 OR priority ILIKE $4`,
+                [`%${search}%`, `%${search}%`, `%${search}%`, `%${search}%`]
             );
             res.status(200).json({
                 status: "success",
                 data: {
                     todos: todos.rows,
+                    total: total.rows[0].count,
+                    page: page,
+                    pages: Math.ceil(total.rows[0].count / PAGE_SIZE),
                 },
             });
+        } catch (err) {
+            console.error(err.message);
+            res.status(500).json({ error: "Something went wrong" });
         }
-
-    }
-    catch (err) {
-        console.error(err.message);
-        res.status(500).json({ error: "Something went wrong" });
     }
 });
+
 app.get("/api/todo/:id", async (req, res) => {
     const { id } = req.params;
     try {

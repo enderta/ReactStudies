@@ -4,9 +4,11 @@ import "./todo.css"
 const ToDo = () => {
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState("");
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
     useEffect(() => {
-        fetch(`http://localhost:3001/api/todo?search=${search}`, {
+        fetch(`http://localhost:3001/api/todo?page=${page}&search=${search}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -16,21 +18,24 @@ const ToDo = () => {
             .then((data) => {
                 console.log(data);
                 setTodos(data.data["todos"]);
+                setTotalPages(data.data["pages"]);
                 localStorage.setItem("todos", JSON.stringify(data));
             });
-    }, [search]);
+    }, [page, search]);
 
-    console.log(localStorage.getItem("todos"));
-    console.log(todos);
+    const handleNextPage = () => {
+        setPage((prevPage) => prevPage + 1);
+    };
 
     return (
         <div>
-            <h1 style={{color: "white"}}>My To Do List</h1>
+            <h1 style={{ color: "white" }}>My To Do List</h1>
             <input
                 type="text"
                 placeholder="Search"
                 onChange={(e) => {
                     setSearch(e.target.value);
+                    setPage(1); // Reset page number when search term changes
                 }}
             />
             <div className="container">
@@ -38,11 +43,33 @@ const ToDo = () => {
                     {todos.map((todo) => {
                         return (
                             <div className="col-md-4">
-                                <TodoCards key={todo.id} todo={todo}/>
+                                <TodoCards key={todo.id} todo={todo} />
                             </div>
                         );
                     })}
                 </div>
+                {
+                    <h6 style={{ color: "goldenrod" }}>
+                        Page {page} of {totalPages}
+                    </h6>
+                }
+                {page < totalPages && (
+                    <button  onClick={handleNextPage}>
+                        <h6 style={{ color: "goldenrod" }}>
+                            {">>>"}
+                        </h6>
+                    </button>
+                )}
+                {
+                    page>1 && (
+                        <button  onClick={()=>setPage(page-1)}>
+                            <h6 style={{ color: "goldenrod" }}>
+                                {"<<<"}
+                            </h6>
+                        </button>
+                    )
+                }
+
             </div>
         </div>
     );
