@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import CreateModal from "./CreateModal";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faPlus, faTasks} from '@fortawesome/free-solid-svg-icons';
+import Notification from "./Notification";
 
 const MainPage = () => {
     const [show, setShow] = useState(false);
@@ -12,6 +13,9 @@ const MainPage = () => {
 
     return (
         <div className="main-container">
+            <div>
+                <Notification/>
+            </div>
             <div className="title">
                 <br/>
                 <h1 style={{color:"white"}} >My Tasks APP</h1>

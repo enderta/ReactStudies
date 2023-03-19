@@ -10,7 +10,6 @@ const Edit = (props) => {
     const handleShow = () => setShow(true);
     const handleClose = () => setShow(false);
 
-    console.log(props.todo)
     return (
         <div>
             <Button variant={"outline-primary"} onClick={handleShow}>

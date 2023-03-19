@@ -9,14 +9,15 @@ import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
 import {faAngleRight} from '@fortawesome/free-solid-svg-icons/faAngleRight';
 import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
-
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ToDo = () => {
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [show, setShow] = useState(false);
-
+    const [msg, setMsg] = useState(false);
     useEffect(() => {
         fetch(`http://localhost:3001/api/todo?page=${page}&search=${search}`, {
             method: "GET",
@@ -29,12 +30,35 @@ const ToDo = () => {
                 console.log(data);
                 setTodos(data.data["todos"]);
                 setTotalPages(data.data["pages"]);
-                localStorage.setItem("todos", JSON.stringify(data));
+                localStorage.setItem("todos", data.data["todos"]);
+                if (data.data["todos"].length === 0) {
+                    const message = `No tasks found!`;
+                    toast.success(message, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000
+                    });
+                }
+                const currentTasks = data.data["todos"].filter((todo) => {
+                    return new Date(todo.duedate).toLocaleDateString()  === new Date().toLocaleDateString();
+                });
+                if (currentTasks.length > 0) {
+                    setMsg( `You have ${currentTasks.length} task(s) due today!`);
+                    toast(msg, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000
+                    });
+                }
+                else {
+                    setMsg(`You have no tasks due today!`);
+                    toast(msg, {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000
+                    }
+                    );
+                }
             });
+
     }, [page, search]);
-
-    console.log(localStorage.getItem("todos"))
-
     const handleNextPage = () => {
         setPage((prevPage) => prevPage + 1);
     };
@@ -47,8 +71,10 @@ const ToDo = () => {
     }
     return (
         <div>
+
             <div style={{ display: "flex", justifyContent: "space-between" }}>
                 <div>
+
                     <div>
                         <Button variant="outline-success" onClick={handleShow}>
                             <FontAwesomeIcon icon={faPlus} />
@@ -73,6 +99,9 @@ const ToDo = () => {
 
             <div className="spacer"></div>
             <div className="container">
+                <div className="header">
+                    {msg}
+                </div>
                 <div className="row">
                     {todos.map((todo) => {
                         return (
@@ -89,7 +118,7 @@ const ToDo = () => {
                 }
                 <di>
                     {   <h6 style={{ color: "goldenrod" }}>
-                      Total Tasks: {localStorage.getItem("todos")?JSON.parse(localStorage.getItem("todos")).data.total:0}
+                      Total Tasks: {todos.length}
                     </h6>}
                 </di>
                 {page < totalPages && (
