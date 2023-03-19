@@ -9,7 +9,7 @@
 body, html{
   width: 100%;
   height: 100%;
-  background-color: black
+
 
 }
 h2{
@@ -19,8 +19,7 @@ h2{
 #root{
   width: 100%;
   height: 100%;
-  background: rgb(87,9,116);
-  background: linear-gradient(340deg, rgba(87,9,116,1) 48%, rgba(18,6,126,0.8323704481792717) 100%);
+
 }
 video{
   position: fixed;

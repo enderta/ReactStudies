@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import TodoCards from "./TodoCards";
 import "./todo.css"
+import Button from "react-bootstrap/Button";
 const ToDo = () => {
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState("");
@@ -50,23 +51,25 @@ const ToDo = () => {
                 </div>
                 {
                     <h6 style={{ color: "goldenrod" }}>
-                        Page {page} of {totalPages}
+                        Page: {page}/{totalPages}
                     </h6>
                 }
+                <di>
+                    {   <h6 style={{ color: "goldenrod" }}>
+                      Total Tasks: {todos.length}
+                    </h6>}
+                </di>
                 {page < totalPages && (
-                    <button  onClick={handleNextPage}>
-                        <h6 style={{ color: "goldenrod" }}>
-                            {">>>"}
-                        </h6>
-                    </button>
+                    <Button onClick={handleNextPage}>
+                        {">>>"}
+                    </Button>
+
                 )}
                 {
                     page>1 && (
-                        <button  onClick={()=>setPage(page-1)}>
-                            <h6 style={{ color: "goldenrod" }}>
-                                {"<<<"}
-                            </h6>
-                        </button>
+                        <Button  onClick={()=>setPage(page-1)}>
+                            {"<<<"}
+                        </Button>
                     )
                 }
 

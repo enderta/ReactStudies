@@ -2,8 +2,10 @@ import React from 'react';
 import Button from "react-bootstrap/Button";
 import "./todo.css"
 import {Card} from "react-bootstrap";
+import Edit from "./Edit";
+import Delete from "./Delete";
 const TodoCards = (props) => {
-    const { task, created_at, duedate, priority, status } = props.todo;
+    const { id,task, created_at, duedate, priority, status } = props.todo;
 
     return (
         <Card className={"cards"}>
@@ -13,8 +15,8 @@ const TodoCards = (props) => {
                 <Card.Text>Due: {new Date(duedate).toLocaleDateString()}</Card.Text>
                 <Card.Text>Priority: {priority}</Card.Text>
                 <Card.Text>Status: {status}</Card.Text>
-                <Button variant="outline-info">Edit</Button>
-                <Button variant="outline-danger">Delete</Button>
+                    <Edit todo={props.todo} />
+                    <Delete todo={props.todo} />
             </Card.Body>
         </Card>
     );

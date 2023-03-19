@@ -1,3 +1,14 @@
+*{
+    box-sizing: border-box;
+
+}
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background: rgb(87,9,116);
+
+}
 .cards{
     display: flex;
     flex-wrap: wrap;
@@ -6,11 +17,18 @@
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
-    background: goldenrod;
+    background: #59b406;
 }
 button{
     margin: 10px;
 }
 input{
     margin: 10px;
+}
+.btn{
+
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
 }
