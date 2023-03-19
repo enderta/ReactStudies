@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import TodoCards from "./TodoCards";
 import "./todo.css"
 import Button from "react-bootstrap/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import CreateModal from "./CreateModal";
 const ToDo = () => {
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState("");
@@ -40,7 +43,14 @@ console.log(localStorage.getItem("todos"))
                 }}
             />
             <div>
-                <Button href="/">Create New Task</Button>
+                <div >
+                    <a href={"/create"}>
+                        <Button variant="outline-success">
+                            <FontAwesomeIcon icon={faPlus} />
+                        </Button>
+                    </a>
+                </div>
+                <div className="spacer"></div>
             </div>
             <div className="container">
                 <div className="row">
@@ -63,14 +73,14 @@ console.log(localStorage.getItem("todos"))
                     </h6>}
                 </di>
                 {page < totalPages && (
-                    <Button onClick={handleNextPage}>
+                    <Button variant={"outline-success"} onClick={handleNextPage}>
                         {">>>"}
                     </Button>
 
                 )}
                 {
                     page>1 && (
-                        <Button  onClick={()=>setPage(page-1)}>
+                        <Button variant={"outline-danger"}  onClick={()=>setPage(page-1)}>
                             {"<<<"}
                         </Button>
                     )

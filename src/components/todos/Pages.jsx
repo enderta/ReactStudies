@@ -2,6 +2,8 @@ import React from 'react';
 import {Route, Routes} from "react-router";
 import MainPage from "./MainPage";
 import ToDo from "./ToDo";
+import CreateModal from "./CreateModal";
+import Create from "./Create";
 
 const Pages = () => {
     return (
@@ -9,6 +11,7 @@ const Pages = () => {
             <Routes>
                 <Route path={"/"} element={<MainPage/>}/>
                 <Route path={"/all"} element={<ToDo/>}/>
+                <Route path={"/create"} element={<Create/>}/>
             </Routes>
 
         </div>

@@ -48,12 +48,12 @@ const CreateModal = (props) => {
     }
     return (
         <div>
-            <h1>Create Task</h1>
+
             <Modal show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Task</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="text-center">
                     <Form>
                         <Form.Group>
                             <Form.Label>Task</Form.Label>

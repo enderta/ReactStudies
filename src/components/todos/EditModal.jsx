@@ -45,7 +45,7 @@ const EditModal = (props) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Edit Task</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className="text-center">
                     <Form>
                         <Form.Group>
                             <Form.Label>Task</Form.Label>
