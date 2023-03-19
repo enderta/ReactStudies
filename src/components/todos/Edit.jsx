@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import EditModal from "./EditModal";
 import Button from "react-bootstrap/Button";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons/faEdit';
 const Edit = (props) => {
     const [show, setShow] = useState(false);
 
@@ -11,7 +12,9 @@ const Edit = (props) => {
     console.log(props.todo)
     return (
         <div>
-            <Button variant={"outline-success"} onClick={handleShow}>Edit</Button>
+            <Button variant={"outline-primary"} onClick={handleShow}>
+                <FontAwesomeIcon icon={faEdit} />
+            </Button>
             <EditModal show={show} handleClose={handleClose} todo={props.todo}/>
         </div>
     );

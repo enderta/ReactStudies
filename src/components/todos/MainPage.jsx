@@ -12,6 +12,11 @@ const MainPage = () => {
 
     return (
         <div className="main-container">
+            <div className="title">
+                <br/>
+                <h1 style={{color:"white"}} >My Tasks APP</h1>
+            </div>
+            <div className="spacer"></div>
 
             <div className="fab" onClick={handleShow}>
                 <FontAwesomeIcon icon={faPlus} />

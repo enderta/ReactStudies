@@ -1,5 +1,7 @@
 import React from 'react';
 import Button from "react-bootstrap/Button";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Delete = (props) => {
     const handleDelete = () => {
@@ -23,7 +25,11 @@ const Delete = (props) => {
 
     return (
         <div>
-            <Button variant={"outline-danger"} onClick={handleDelete}>Delete</Button>
+            <div>
+                <Button variant="outline-danger" onClick={handleDelete}>
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                </Button>
+            </div>
         </div>
     );
 };
