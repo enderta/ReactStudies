@@ -1,43 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Form, FormSelect, Modal} from "react-bootstrap";
 
 const EditModal = (props) => {
-    const handleChanges = (e) => {
-        e.preventDefault();
-        if (e.target.name === "task") {
-            props.todo.setTask(e.target.value);
-        }
-        if (e.target.name === "duedate") {
-            props.setDuedate(e.target.value);
-        }
-        if (e.target.name === "priority") {
-            props.setPriority(e.target.value);
-        }
-        if (e.target.name === "status") {
-            props.setStatus(e.target.value);
-        }
-    }
+    const [task, setTask] = useState();
+    const [duedate, setDuedate] = useState();
+    const [priority, setPriority] = useState();
+    const [status, setStatus] = useState();
+
+
     const handleSubmit = () => {
-        fetch("http://localhost:3001/api/todo", {
-                method: "POST",
+        fetch(`http://localhost:3001/api/todo/${props.todo.id}`, {
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    task: props.todo.task,
-                    duedate: props.todo.duedate,
-                    priority: props.todo.priority,
-                    status: props.todo.status,
+                    task: task,
+                    duedate: duedate,
+                    priority: priority,
+                    status: status,
                 }),
             }
         )
             .then((res) => res.json())
             .then((data) => {
+                alert("Task updated successfully");
+                window.location.href = "/all";
                 console.log(data);
 
             })
     }
+    const handleChanges = (e) => {
+        e.preventDefault();
+        if (e.target.name === "task") {
+            setTask(e.target.value);
+        }
+        if (e.target.name === "duedate") {
+            setDuedate(e.target.value);
+        }
+        if (e.target.name === "priority") {
+            setPriority(e.target.value);
+        }
+        if (e.target.name === "status") {
+            setStatus(e.target.value);
+        }
 
+    }
     return (
         <div>
 

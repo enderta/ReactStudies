@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Form, FormSelect, Modal} from "react-bootstrap";
 
-const Create = () => {  const [task, setTask] = useState();
+const Create = () => {
+    const [task, setTask] = useState();
     const [duedate, setDuedate] = useState();
     const [priority, setPriority] = useState();
     const [status, setStatus] = useState();

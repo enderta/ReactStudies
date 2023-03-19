@@ -28,7 +28,7 @@ const TodoCards = (props) => {
                 </div>
             </Card.Body>
             <div className="d-flex justify-content-end">
-                <Edit todo={props.todo}/>
+                <Edit todo={props.todo} />
                 <Delete todo={props.todo}/>
             </div>
         </Card>
