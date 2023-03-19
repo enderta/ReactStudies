@@ -10,6 +10,8 @@ const ToDo = () => {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [show, setShow] = useState(false);
+
 
     useEffect(() => {
         fetch(`http://localhost:3001/api/todo?page=${page}&search=${search}`, {
@@ -30,10 +32,14 @@ console.log(localStorage.getItem("todos"))
     const handleNextPage = () => {
         setPage((prevPage) => prevPage + 1);
     };
-
+    const handleShow = () => setShow(true);
+    const handleClose = () => setShow(false);
     return (
         <div>
-            <h1 style={{ color: "white" }}>My To Do List</h1>
+
+                <a href={"/"}>
+              <h1 style={{alignContent:"center"}}>Todo App</h1>
+                </a>
             <input
                 type="text"
                 placeholder="Search"
@@ -44,11 +50,11 @@ console.log(localStorage.getItem("todos"))
             />
             <div>
                 <div >
-                    <a href={"/create"}>
-                        <Button variant="outline-success">
+
+                        <Button variant="outline-success" onClick={handleShow}>
                             <FontAwesomeIcon icon={faPlus} />
                         </Button>
-                    </a>
+                        <CreateModal show={show} handleClose={handleClose}/>
                 </div>
                 <div className="spacer"></div>
             </div>

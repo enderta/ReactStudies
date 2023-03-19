@@ -51,7 +51,7 @@ const CreateModal = (props) => {
 
             <Modal show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit Task</Modal.Title>
+                    <Modal.Title>Create Task</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="text-center">
                     <Form>
