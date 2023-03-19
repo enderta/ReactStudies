@@ -1,17 +1,19 @@
 import React from 'react';
-import Button from "react-bootstrap/Button";
 import "./todo.css"
 import {Card} from "react-bootstrap";
 import Edit from "./Edit";
 import Delete from "./Delete";
 const TodoCards = (props) => {
-    const { id,task, created_at, duedate, priority, status } = props.todo;
+   const [task, setTask] = React.useState(props.todo.task);
+    const [duedate, setDuedate] = React.useState(props.todo.duedate);
+    const [priority, setPriority] = React.useState(props.todo.priority);
+    const [status, setStatus] = React.useState(props.todo.status);
+
 
     return (
         <Card className={"cards"}>
             <Card.Body>
                 <Card.Title>{task}</Card.Title>
-                <Card.Text>Created: {new Date(created_at).toLocaleDateString()}</Card.Text>
                 <Card.Text>Due: {new Date(duedate).toLocaleDateString()}</Card.Text>
                 <Card.Text>Priority: {priority}</Card.Text>
                 <Card.Text>Status: {status}</Card.Text>

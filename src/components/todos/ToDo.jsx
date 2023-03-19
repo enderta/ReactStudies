@@ -23,7 +23,7 @@ const ToDo = () => {
                 localStorage.setItem("todos", JSON.stringify(data));
             });
     }, [page, search]);
-
+console.log(localStorage.getItem("todos"))
     const handleNextPage = () => {
         setPage((prevPage) => prevPage + 1);
     };
@@ -39,6 +39,9 @@ const ToDo = () => {
                     setPage(1); // Reset page number when search term changes
                 }}
             />
+            <div>
+                <Button href="/">Create New Task</Button>
+            </div>
             <div className="container">
                 <div className="row">
                     {todos.map((todo) => {
@@ -56,7 +59,7 @@ const ToDo = () => {
                 }
                 <di>
                     {   <h6 style={{ color: "goldenrod" }}>
-                      Total Tasks: {todos.length}
+                      Total Tasks: {localStorage.getItem("todos")?JSON.parse(localStorage.getItem("todos")).data.total:0}
                     </h6>}
                 </di>
                 {page < totalPages && (
