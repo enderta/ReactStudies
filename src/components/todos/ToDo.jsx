@@ -5,10 +5,11 @@ import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import CreateModal from "./CreateModal";
-import { faAngleLeft } from '@fortawesome/free-solid-svg-icons/faAngleLeft';
-import { faAngleRight } from '@fortawesome/free-solid-svg-icons/faAngleRight';
-import { faHome } from '@fortawesome/free-solid-svg-icons/faHome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons/faSearch';
+import {faAngleLeft} from '@fortawesome/free-solid-svg-icons/faAngleLeft';
+import {faAngleRight} from '@fortawesome/free-solid-svg-icons/faAngleRight';
+import {faHome} from '@fortawesome/free-solid-svg-icons/faHome';
+import {faSearch} from '@fortawesome/free-solid-svg-icons/faSearch';
+
 const ToDo = () => {
     const [todos, setTodos] = useState([]);
     const [search, setSearch] = useState("");

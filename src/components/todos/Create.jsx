@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Form, FormSelect, Modal} from "react-bootstrap";
+import {Form, FormSelect} from "react-bootstrap";
 
 const Create = () => {
     const [task, setTask] = useState();

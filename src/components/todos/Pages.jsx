@@ -2,7 +2,6 @@ import React from 'react';
 import {Route, Routes} from "react-router";
 import MainPage from "./MainPage";
 import ToDo from "./ToDo";
-import CreateModal from "./CreateModal";
 import Create from "./Create";
 
 const Pages = () => {

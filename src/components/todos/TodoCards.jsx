@@ -3,7 +3,6 @@ import "./todo.css"
 import {Card} from "react-bootstrap";
 import Edit from "./Edit";
 import Delete from "./Delete";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const TodoCards = (props) => {
     const [task, setTask] = React.useState(props.todo.task);
