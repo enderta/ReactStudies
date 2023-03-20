@@ -32,8 +32,8 @@ const ToDo = () => {
                 setTotalPages(data.data["pages"]);
                 localStorage.setItem("todos", data.data["todos"]);
                 if (data.data["todos"].length === 0) {
-                    const message = `No tasks found!`;
-                    toast.success(message, {
+                   setMsg(`No tasks found!`);
+                    toast.success(msg, {
                         position: toast.POSITION.TOP_RIGHT,
                         autoClose: 3000
                     });

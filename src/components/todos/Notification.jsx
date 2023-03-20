@@ -22,14 +22,14 @@ const Notification = () => {
                 if (currentTasks.length > 0) {
                     setMsg( `You have ${currentTasks.length} task(s) due today!`);
                     toast(msg, {
-                        position: toast.POSITION.TOP_RIGHT,
+                        position: toast.POSITION.TOP_CENTER,
                         autoClose: 3000
                     });
                 }
                 else {
                     setMsg(`You have no tasks due today!`);
                     toast(msg, {
-                            position: toast.POSITION.TOP_RIGHT,
+                            position: toast.POSITION.TOP_CENTER,
                             autoClose: 3000
                         }
                     );

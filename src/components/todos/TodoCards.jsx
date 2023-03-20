@@ -10,15 +10,12 @@ const TodoCards = (props) => {
     const [priority, setPriority] = React.useState(props.todo.priority);
     const [status, setStatus] = React.useState(props.todo.status);
 
-
     return (
         <Card className={"cards"}>
             <Card.Body className="d-flex justify-content-between">
                 <div>
                     <Card.Title>{task}</Card.Title>
-
                 </div>
-
             </Card.Body>
             <Card.Body className="d-flex justify-content-between">
                 <div>
@@ -29,9 +26,7 @@ const TodoCards = (props) => {
             </Card.Body>
             <div className="d-flex justify-content-end">
                 <Edit todo={props.todo} />
-
                 <Delete todo={props.todo} />
-
             </div>
         </Card>
 

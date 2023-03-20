@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Form, FormSelect, Modal} from "react-bootstrap";
+import {toast} from "react-toastify";
 
 const EditModal = (props) => {
     const [task, setTask] = useState();
@@ -24,7 +25,10 @@ const EditModal = (props) => {
         )
             .then((res) => res.json())
             .then((data) => {
-                alert("Task updated successfully");
+               toast("Task created successfully", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000
+               });
                 window.location.href = "/all";
                 console.log(data);
 

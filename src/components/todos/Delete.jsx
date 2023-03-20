@@ -2,6 +2,7 @@ import React from 'react';
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
+import {toast} from "react-toastify";
 
 const Delete = (props) => {
     const handleDelete = () => {
@@ -17,7 +18,10 @@ const Delete = (props) => {
         )
             .then((res) => res.json())
             .then((data) => {
-                alert("Deleted")
+              toast("Task deleted successfully", {
+                    position: toast.POSITION.TOP_CENTER,
+                    autoClose: 3000
+              })
                 window.location.reload();
                 console.log(data);
         })
