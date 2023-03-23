@@ -27,7 +27,7 @@ const EditModal = (props) => {
             .then((data) => {
                toast("Task updated successfully", {
                     position: toast.POSITION.TOP_CENTER,
-                    autoClose: 3000
+                    autoClose: 5000
                });
                 window.location.href = "/all";
                 console.log(data);
