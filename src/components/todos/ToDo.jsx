@@ -18,6 +18,7 @@ const ToDo = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [show, setShow] = useState(false);
     const [msg, setMsg] = useState(false);
+    const [totalTasks, setTotalTasks] = useState(0);
     useEffect(() => {
         fetch(`http://localhost:3001/api/todo?page=${page}&search=${search}`, {
             method: "GET",
@@ -30,6 +31,7 @@ const ToDo = () => {
                 console.log(data);
                 setTodos(data.data["todos"]);
                 setTotalPages(data.data["pages"]);
+                setTotalTasks(data.data["total"]);
                 localStorage.setItem("todos", data.data["todos"]);
                 if (data.data["todos"].length === 0) {
                    setMsg(`No tasks found!`);
@@ -118,7 +120,7 @@ const ToDo = () => {
                 }
                 <di>
                     {   <h6 style={{ color: "goldenrod" }}>
-                      Total Tasks: {todos.length}
+                      Total Tasks: {totalTasks}
                     </h6>}
                 </di>
                 {page < totalPages && (
