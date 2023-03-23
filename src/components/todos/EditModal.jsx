@@ -25,7 +25,7 @@ const EditModal = (props) => {
         )
             .then((res) => res.json())
             .then((data) => {
-               toast("Task created successfully", {
+               toast("Task updated successfully", {
                     position: toast.POSITION.TOP_CENTER,
                     autoClose: 3000
                });
