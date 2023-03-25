@@ -127,17 +127,31 @@ app.delete('/categories/:id', async (req, res) => {
 
 // Get all budget items
 app.get('/budget', async (req, res) => {
+    const search = req.query.search || "";
+    const sort = req.query.sort || "amount";
+    const order = req.query.order || "desc";
     try {
-        const {rows} = await pool.query('SELECT * FROM budget');
-       res.status(200).json({
-                status: "success",
-                data: {
-                    id: rows[0].id,
-                    category_id: rows[0].category_id,
-                    description: rows[0].description,
-                    amount: rows[0].amount
+        if(!search){
+            const {rows} = await pool.query(`SELECT * FROM budget ORDER BY ${sort} ${order}`);
+            res.status(200).json({
+                    status: "success",
+                    data: {
+                    rows
+                    }
                 }
-       });
+            );
+        }
+        else {
+            //join the categories table to the budget table and search for the search term in the category name or description
+            const {rows} = await pool.query(`SELECT b.id,b.category_id,b.description,b.amount,c.name,c.id FROM budget b JOIN categories c ON b.category_id = c.id 
+         WHERE c.name ILIKE $1 OR b.description ILIKE $1 ORDER BY ${sort} ${order}`, [`%${search}%`]);
+            res.status(200).json({
+                    status: "success",
+                    data: {
+                        rows
+                    }
+            });
+        }
     } catch (err) {
         console.error(err);
         res.status(500).send('Server error');
