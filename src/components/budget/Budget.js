@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons/faSearch";
 import './budget.css';
 import {wait} from "@testing-library/user-event/dist/utils";
+import CategoryDropDown from "./CategoryDropDown";
 
 
 const Budget = () => {
@@ -94,6 +95,7 @@ const Budget = () => {
                             </div>
                         </div>
                     </div>
+                    <CategoryDropDown />
                 </div>
             </div>
 

@@ -49,19 +49,20 @@ const CategoryDropDown = () => {
 
     return (
         <div>
-        <FormSelect onChange={handleCategoryChange}>
-            <option value="other">Other</option>
-            <option value="food">Food</option>
-            <option value="housing">Housing</option>
-            <option value="transportation">Transportation</option>
-            <option value="utilities">Utilities</option>
-            <option value="insurance">Insurance</option>
-            <option value="medical">Medical</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="personal">Personal</option>
-            <option value="savings">Savings</option>
-            <option value="debt">Debt</option>
-        </FormSelect>
+
+            <FormSelect onChange={handleCategoryChange}>
+                <option value="other">Other</option>
+                <option value="food">Food</option>
+                <option value="housing">Housing</option>
+                <option value="transportation">Transportation</option>
+                <option value="utilities">Utilities</option>
+                <option value="insurance">Insurance</option>
+                <option value="medical">Medical</option>
+                <option value="entertainment">Entertainment</option>
+                <option value="personal">Personal</option>
+                <option value="savings">Savings</option>
+                <option value="debt">Debt</option>
+            </FormSelect>
         </div>
     );
 };

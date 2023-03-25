@@ -27,3 +27,12 @@
 .card-text {
     font-size: 2rem;
 }
+select {
+
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    font-size: 1rem;
+    height: 50px;
+}
