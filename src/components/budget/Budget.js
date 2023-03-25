@@ -42,10 +42,8 @@ const Budget = () => {
                     total += Number(item.amount);
                 })
                 setTotal(total);
-            }
-            )
+            })
     }, []);
-
     console.log(budget);
     console.log(searchData);
 
