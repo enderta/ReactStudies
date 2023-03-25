@@ -4,6 +4,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons/faSearch";
 import './budget.css';
 import {wait} from "@testing-library/user-event/dist/utils";
 import CategoryDropDown from "./CategoryDropDown";
+import Graphics from "./Graphics";
 
 
 const Budget = () => {
@@ -95,10 +96,15 @@ const Budget = () => {
                             </div>
                         </div>
                     </div>
-                    <CategoryDropDown />
+                    <div className={'chart-container'} style={{backgroundColor: 'goldenrod'}}>
+                        <div className='chart'>
+                            <div className='chart-title'>
+                                <Graphics budget={budget}/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
     );
 };
