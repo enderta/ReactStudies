@@ -47,6 +47,7 @@ const Budget = () => {
     console.log(budget);
     console.log(searchData);
 
+
     return (
         <div>
             <div className='container'>

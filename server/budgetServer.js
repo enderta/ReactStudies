@@ -25,9 +25,9 @@ app.get('/categories', async (req, res) => {
         const {rows} = await pool.query('SELECT * FROM categories');
         res.status(200).json({
                 status: "success",
+            message:`${rows.length} categories retrieved`,
                 data: {
-                  id: rows[0].id,
-                    name: rows[0].name
+                 rows
 
                 }
             }
@@ -48,8 +48,9 @@ app.get('/categories/:id', async (req, res) => {
         } else {
             res.status(200).json({
                     status: "success",
+                message: "Category retrieved",
                     data: {
-                        categories: rows[0]
+                        rows
                     }
                 }
             );
@@ -67,9 +68,9 @@ app.post('/categories', async (req, res) => {
         const {rows} = await pool.query('INSERT INTO categories (name) VALUES ($1) RETURNING *', [name]);
         res.status(201).json({
                 status: "success",
+            message: "Category created",
                 data: {
-                    id: rows[0].id,
-                    name: rows[0].name
+                 rows
                 }
             }
         );
@@ -90,9 +91,9 @@ app.put('/categories/:id', async (req, res) => {
         } else {
             res.status(200).json({
                     status: "success",
+                message: "Category updated",
                     data: {
-                        id: rows[0].id,
-                        name: rows[0].name
+                       rows
                     }
                 }
             );
@@ -135,6 +136,7 @@ app.get('/budget', async (req, res) => {
             const {rows} = await pool.query(`SELECT * FROM budget ORDER BY ${sort} ${order}`);
             res.status(200).json({
                     status: "success",
+                message: `${rows.length} budget items found`,
                     data: {
                     rows
                     }
@@ -147,6 +149,7 @@ app.get('/budget', async (req, res) => {
          WHERE c.name ILIKE $1 OR b.description ILIKE $1 ORDER BY ${sort} ${order}`, [`%${search}%`]);
             res.status(200).json({
                     status: "success",
+                message: `${rows.length} budget items found for search term: ${search}`,
                     data: {
                         rows
                     }
@@ -168,6 +171,7 @@ app.get('/budget/:id', async (req, res) => {
         } else {
            res.status(200).json({
                 status: "success",
+               message: "Budget item found",
                 data: {
                     id: rows[0].id,
                     category_id: rows[0].category_id,
@@ -189,12 +193,9 @@ app.post('/budget', async (req, res) => {
         const {rows} = await pool.query('INSERT INTO budget (category_id, description, amount) VALUES ($1, $2, $3) RETURNING *', [category_id, description, amount]);
         res.status(201).json({
                 status: "success",
+            message: "Budget item created",
                 data: {
-                    id: rows[0].id,
-                    category_id: rows[0].category_id,
-                    description: rows[0].description,
-                    amount: rows[0].amount
-
+                   rows
                 }
         });
     } catch (err) {
@@ -212,7 +213,14 @@ app.put('/budget/:id', async (req, res) => {
         if (rows.length === 0) {
             res.status(404).send('Budget item not found');
         } else {
-            res.send(rows[0]);
+            res.status(200).json({
+                    status: "success",
+                    message: "Budget item updated",
+                    data: {
+                      rows
+                    }
+                }
+            );
         }
     } catch (err) {
         console.error(err);
@@ -228,7 +236,11 @@ app.delete('/budget/:id', async (req, res) => {
         if (rows.length === 0) {
             res.status(404).send('Budget item not found');
         } else {
-            res.send(rows[0]);
+            res.status(200).json({
+                    status: "success",
+                    message: "Budget item deleted"
+                }
+            );
         }
     } catch (err) {
         console.error(err);
