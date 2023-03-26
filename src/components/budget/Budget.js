@@ -6,6 +6,7 @@ import {wait} from "@testing-library/user-event/dist/utils";
 import CategoryDropDown from "./CategoryDropDown";
 import Graphics from "./Graphics";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import AddExpense from "./AddExpense";
 
 
 const Budget = () => {
@@ -51,6 +52,7 @@ const Budget = () => {
 
     return (
         <div>
+        <div>
             <div className='container'>
                 <div className='search-container'>
                     <div className='search-input'>
@@ -63,48 +65,68 @@ const Budget = () => {
                             }}
                         />
                     </div>
-                    <div className='budget-summary'>
-                        <div className='card'>
-                            <div className='card-body'>
-                                <h5 className='card-title'>Budget</h5>
-                                <input
-                                    type="number"
-                                    className='card-text'
-                                    placeholder="0"
-                                    onChange={handleFinance}
-                                />
+                    <div className={"container"}>
+                        <div className='budget-summary'>
+                            <div className='card'>
+                                <div className='card-body'>
+                                    <h5 className='card-title'>Budget</h5>
+                                    <input
+                                        type="number"
+                                        className='card-text'
+                                        placeholder="0"
+                                        onChange={handleFinance}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                        <div className='card'>
-                            <div className='card-body'>
-                                <h5 className='card-title'>Remaining</h5>
-                                <p className='card-text'>
-                                    {
-                                        finance - total
-                                    }
-                                </p>
+                            <div className='card'>
+                                <div className='card-body'>
+                                    <h5 className='card-title'>Remaining</h5>
+                                    <p className='card-text'>
+                                        {
+                                            finance - total
+                                        }
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <div className='card'>
-                            <div className='card-body'>
-                                <h5 className='card-title'>Total Spent</h5>
-                                <p className='card-text'>
-                                    {
-                                       total
-                                    }
-                                </p>
+                            <div className='card'>
+                                <div className='card-body'>
+                                    <h5 className='card-title'>Total Spent</h5>
+                                    <p className='card-text'>
+                                        {
+                                            total
+                                        }
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className={'chart-container'} style={{backgroundColor: 'goldenrod'}}>
-                        <div className='chart'>
-                            <div className='chart-title'>
-                                <Graphics budget={budget}/>
+
+                    <div className='container'>
+                        <div className='chart-container' style={{ backgroundColor: 'goldenrod' }}>
+                            <div className='chart'>
+                                <div className='chart-title'>
+                                    <Graphics budget={budget} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <div className='container'>
+                    <div style={{margin:"20px",padding:"20px"}}>
+                        <div className='d-flex justify-content-center'>
+                            <div className='add-expense'>
+                                <div >
+                                    <AddExpense />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 };

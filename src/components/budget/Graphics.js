@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Chart } from 'react-google-charts';
+import AddExpense from "./AddExpense";
 
 const Graphics = (props) => {
     const [isPieChart, setIsPieChart] = useState(true);
@@ -64,6 +65,12 @@ const Graphics = (props) => {
                         }}
                     />
                 )}
+            <div >
+
+            </div>
+            <div>
+
+            </div>
             </div>
 
     );

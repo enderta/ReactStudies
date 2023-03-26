@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import './App.css';
+
 import Pages from "./components/todos/Pages";
 import ToDo from "./components/todos/ToDo";
 import Budget from "./components/budget/Budget";
