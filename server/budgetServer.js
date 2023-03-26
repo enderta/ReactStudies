@@ -133,7 +133,8 @@ app.get('/budget', async (req, res) => {
     const order = req.query.order || "desc";
     try {
         if(!search){
-            const {rows} = await pool.query(`SELECT * FROM budget ORDER BY ${sort} ${order}`);
+            const {rows} = await pool.query(`SELECT b.id,b.category_id,b.description,b.amount,c.name,c.id FROM budget b JOIN categories c ON b.category_id = c.id 
+                                                             ORDER BY ${sort} ${order}`);
             res.status(200).json({
                     status: "success",
                 message: `${rows.length} budget items found`,

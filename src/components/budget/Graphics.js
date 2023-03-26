@@ -1,21 +1,37 @@
 import React, { useState } from 'react';
 import { Chart } from 'react-google-charts';
 import AddExpense from "./AddExpense";
+import budget from "./Budget";
 
 const Graphics = (props) => {
+
     const [isPieChart, setIsPieChart] = useState(true);
-    const data = props.budget.data ? props.budget.data.rows.reduce((acc, cur) => {
-        if (cur.description in acc) {
-            acc[cur.description] += Number(cur.amount);
-        } else {
-            acc[cur.description] = Number(cur.amount);
-        }
-        return acc;
-    }, {}) : {};
+    const categories = [
+        "Other",
+        "Food",
+        "Housing",
+        "Transportation",
+        "Utilities",
+        "Insurance",
+        "Medical",
+        "Entertainment",
+        "Personal",
+        "Savings",
+        "Debt"
+    ];
 
     const chartData = [['Category', 'Amount']];
-    Object.keys(data).forEach((key) => chartData.push([key, data[key]]));
 
+    if (props.budget.data) {
+        const dataRows = props.budget.data.rows;
+        categories.forEach(category => {
+            const amountSum = dataRows.filter(row => row.name === category)
+                .map(row => Number(row.amount))
+                .reduce((a, b) => a + b, 0);
+            chartData.push([category.toLowerCase(), amountSum]);
+            chartData.sort((a, b) => b[1] - a[1]);
+        });
+    }
     const toggleChartType = () => {
         setIsPieChart(!isPieChart);
     };
@@ -33,6 +49,7 @@ const Graphics = (props) => {
                         chartType='PieChart'
                         loader={<div>Loading Chart</div>}
                         data={chartData}
+
                         options={{
                             title: 'Expenses by Category',
                             titleColor: 'purple',
@@ -53,6 +70,16 @@ const Graphics = (props) => {
                         chartType='BarChart'
                         loader={<div>Loading Chart</div>}
                         data={chartData}
+                        formatters={[
+                            {   type: 'NumberFormat',
+                                column: 1,
+                                options: {
+                                    prefix: '$',
+                                    suffix: ' USD',
+                                },
+                            },
+                        ]
+                                }
                         options={{
                             title: 'Expenses by Category',
                             titleColor: 'purple',
