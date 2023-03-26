@@ -46,7 +46,7 @@ chart {
     height: 200px;
     background-color: goldenrod;
     color: #fff;
-    border-radius: 50%;
+    border-radius: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
