@@ -20,7 +20,7 @@ const List = () => {
     }, [search]);
     console.log(searchData);
     return (
-        <div>
+        <div className={"container"}>
             <div className='search-input'>
                 <FontAwesomeIcon icon={faSearch} color={'white'}/>
                 <input

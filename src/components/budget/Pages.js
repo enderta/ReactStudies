@@ -5,6 +5,7 @@ import ToDo from "../todos/ToDo";
 import Create from "../todos/Create";
 import Budget from "./Budget";
 import List from "./List";
+import './budget.css'
 
 const Pages = () => {
     return (
