@@ -4,6 +4,7 @@ import {faSearch} from "@fortawesome/free-solid-svg-icons/faSearch";
 import {Table} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import {faLeftLong, faLeftRight} from "@fortawesome/free-solid-svg-icons";
+import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
 
 const List = () => {
     const [search, setSearch] = useState('');
@@ -55,10 +56,10 @@ const List = () => {
 
                 }
             </div>
-            <Button onClick={()=>{
+            <Button variant={"outline-warning"} onClick={()=>{
                 window.location.href = '/';}
             }>
-                <FontAwesomeIcon icon={faLeftLong}/> Back
+                <FontAwesomeIcon icon={faHome}/>
 
             </Button>
         </div>
