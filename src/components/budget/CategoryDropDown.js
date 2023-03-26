@@ -7,44 +7,32 @@ const CategoryDropDown = () => {
 
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
-        if(e.target.value()==="other"){
+        if (e.target.value() === "other") {
             setCategoryID(0);
-        }
-        else if (e.target.value()==="food"){
+        } else if (e.target.value() === "food") {
             setCategoryID(1);
-        }
-        else if (e.target.value()==="housing"){
+        } else if (e.target.value() === "housing") {
             setCategoryID(2);
-        }
-        else if (e.target.value()==="transportation"){
+        } else if (e.target.value() === "transportation") {
             setCategoryID(3);
-        }
-        else if (e.target.value()==="utilities"){
+        } else if (e.target.value() === "utilities") {
             setCategoryID(4);
-        }
-        else if (e.target.value()==="insurance"){
+        } else if (e.target.value() === "insurance") {
             setCategoryID(5);
-        }
-        else if (e.target.value()==="medical"){
+        } else if (e.target.value() === "medical") {
             setCategoryID(6);
-        }
-        else if (e.target.value()==="entertainment"){
+        } else if (e.target.value() === "entertainment") {
             setCategoryID(7);
-        }
-        else if (e.target.value()==="personal"){
+        } else if (e.target.value() === "personal") {
             setCategoryID(8);
-        }
-        else if (e.target.value()==="savings"){
+        } else if (e.target.value() === "savings") {
             setCategoryID(9);
-        }
-        else if (e.target.value()==="debt"){
+        } else if (e.target.value() === "debt") {
             setCategoryID(10);
-        }
-        else{
+        } else {
             setCategoryID(0);
         }
     }
-
 
 
     return (

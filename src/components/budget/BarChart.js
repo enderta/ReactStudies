@@ -25,10 +25,10 @@ const BarChart = (props) => {
                 options={{
                     title: 'Expenses by Category',
                     backgroundColor: 'goldenrod',
-                    chartArea: { backgroundColor: 'goldenrod' },
-                    legend: { textStyle: { color: 'white' } },
-                    hAxis: { textStyle: { color: 'white' } },
-                    vAxis: { textStyle: { color: 'white' } },
+                    chartArea: {backgroundColor: 'goldenrod'},
+                    legend: {textStyle: {color: 'white'}},
+                    hAxis: {textStyle: {color: 'white'}},
+                    vAxis: {textStyle: {color: 'white'}},
                 }}
             />
         </div>

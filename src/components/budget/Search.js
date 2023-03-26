@@ -14,9 +14,9 @@ const Search = () => {
         fetch(`http://localhost:3001/budget?search=${search}`)
             .then(response => response.json())
             .then(data => {
-                setData(data);
+                    setData(data);
 
-            }
+                }
             )
     }, []);
     console.log(data);
