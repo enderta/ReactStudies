@@ -44,7 +44,7 @@ chart {
 .plus{
     width: 200px;
     height: 200px;
-    background-color: #48ff00;
+    background-color: goldenrod;
     color: #fff;
     border-radius: 50%;
     display: flex;
@@ -58,5 +58,5 @@ chart {
 
 }
 .plus:hover {
-    background-color: #721b8f;
+    background-color: rgb(87,9,116);
 }
