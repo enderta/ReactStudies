@@ -5,6 +5,7 @@ import './budget.css';
 import {wait} from "@testing-library/user-event/dist/utils";
 import CategoryDropDown from "./CategoryDropDown";
 import Graphics from "./Graphics";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
 
 
 const Budget = () => {

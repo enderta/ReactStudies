@@ -22,7 +22,7 @@ const Graphics = (props) => {
     return (
         <div className='chart'  onClick={toggleChartType}>
             <div className='chart-title'>
-                <h5>{isPieChart ? 'click for Bar Chart' : 'click for Pie Chart'}</h5>
+                <h5 style={{color:"purple"}}>{isPieChart ? 'click for Bar Chart' : 'click for Pie Chart'}</h5>
             </div>
 
                 {isPieChart ? (
@@ -34,11 +34,16 @@ const Graphics = (props) => {
                         data={chartData}
                         options={{
                             title: 'Expenses by Category',
+                            titleColor: 'purple',
                             backgroundColor: 'goldenrod',
                             chartArea: { backgroundColor: 'goldenrod' },
-                            legend: { textStyle: { color: 'white' } },
-                            pieSliceTextStyle: { color: 'white' },
-                        }}
+                            legend: { textStyle: { color: 'purple' } },
+                            hAxis: { textStyle: { color: 'white' } },
+                            vAxis: { textStyle: { color: 'white' } },
+                            is3D: true
+                        }
+                        }
+
                     />
                 ) : (
                     <Chart
@@ -49,11 +54,13 @@ const Graphics = (props) => {
                         data={chartData}
                         options={{
                             title: 'Expenses by Category',
+                            titleColor: 'purple',
                             backgroundColor: 'goldenrod',
                             chartArea: { backgroundColor: 'goldenrod' },
-                            legend: { textStyle: { color: 'white' } },
-                            hAxis: { textStyle: { color: 'white' } },
-                            vAxis: { textStyle: { color: 'white' } },
+                            legend: { textStyle: { color: 'purple' } },
+                            hAxis: { textStyle: { color: 'purple' } },
+                            vAxis: { textStyle: { color: 'purple' } },
+                            colors: ['purple'],
                         }}
                     />
                 )}
