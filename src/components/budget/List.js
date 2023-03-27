@@ -52,10 +52,10 @@ const List = () => {
                             );
                         })}
                         </tbody>
-                        <tfoot>
+                        <tfoot style={{ textAlign: "center", fontSize:"x-large" }}>
                         <tr>
-                            <td colSpan="2" style={{ textAlign: "center" }}>Total</td>
-                            <td style={{ textAlign: "center" }}>
+                            <td colSpan="2" >Total Spent</td>
+                            <td>
                                 {searchData.data.rows.reduce((acc, item) => {
                                     return acc + Number(item.amount);
                                 }, 0)}
