@@ -34,6 +34,7 @@ const Budget = () => {
                 setTotal(total);
             })
     }, []);
+    localStorage.setItem('total', total);
 
     return (
         <div>

@@ -33,11 +33,12 @@ const List = () => {
             </div>
             <div>
                 {searchData.data ? (
-                    <Table variant={"dark"} bordered>
+                    <Table style={{ background: "goldenrod" }} bordered>
                         <thead>
                         <tr>
                             <th>Category</th>
                             <th>Amount</th>
+                            <th>Description</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -46,15 +47,25 @@ const List = () => {
                                 <tr key={index}>
                                     <td>{item.name}</td>
                                     <td>{item.amount}</td>
+                                    <td>{item.description}</td>
                                 </tr>
-                            )
-                        }
-                        )}
+                            );
+                        })}
                         </tbody>
-                    </Table>)
-                    : (<div> No data found</div>)
-
-                }
+                        <tfoot>
+                        <tr>
+                            <td colSpan="2" style={{ textAlign: "center" }}>Total</td>
+                            <td style={{ textAlign: "center" }}>
+                                {searchData.data.rows.reduce((acc, item) => {
+                                    return acc + Number(item.amount);
+                                }, 0)}
+                            </td>
+                        </tr>
+                        </tfoot>
+                    </Table>
+                ) : (
+                    <div>No data found</div>
+                )}
             </div>
             <Button variant={"outline-warning"} onClick={()=>{
                 window.location.href = '/';}
