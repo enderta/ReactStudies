@@ -54,17 +54,17 @@ const AddExpense = () => {
     }
 
     return (
-        <div>
-            <div>
+        <div >
+            <div >
                 <div className={"plus"} onClick={handleShow}>
                     <FontAwesomeIcon icon={faPlus}/>
-                </div>
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+                </div >
+                <Modal  show={show} onHide={handleClose}>
+                    <Modal.Header style={{background:"goldenrod"}} closeButton>
                         <Modal.Title>Add Expense</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                        <form onSubmit={handleSubmit}>
+                    <Modal.Body style={{background:"goldenrod"}}>
+                        <form style={{background:"goldenrod"}}  onSubmit={handleSubmit}>
                             <div className="form-group">
                                 <label htmlFor="description">Description</label>
                                 <input
@@ -108,13 +108,14 @@ const AddExpense = () => {
                                     </div>
                                 </div>
                             </div>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
+
                         </form>
                     </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>
+                    <Modal.Footer style={{background:"goldenrod"}}>
+                        <Button variant="outline-success" type="submit">
+                            Submit
+                        </Button>
+                        <Button variant="outline-primary" onClick={handleClose}>
                             Close
                         </Button>
                     </Modal.Footer>
