@@ -13,10 +13,9 @@ body{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 10px auto;
-    width: 100%;
-    max-width: 1200px;
-    padding: 0 20px;
+    margin: 10px;
+    max-width: 400px;
+    padding: 10px;
     background: #59b406;
 }
 button{

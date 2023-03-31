@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Card, Button, CardGroup } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Card, Button    } from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
+import BookCards from "./BookCards";
+import '../todos/todo.css';
 
 function Books() {
     const [books, setBooks] = useState([]);
@@ -44,20 +46,13 @@ function Books() {
                 <input type="text" name="query" />
                 <button type="submit">Search</button>
             </form>
-            <CardGroup>
+            <div className="row">
                 {pageBooks.map((book) => (
-                    <Card key={book.key}>
-                        <Card.Img variant="top" src={`http://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`} />
-                        <Card.Body>
-                            <Card.Title>{book.title}</Card.Title>
-                            <Card.Text>{book.author_name}</Card.Text>
-                            <Button variant="primary" href={`https://openlibrary.org${book.key}`} target="_blank">
-                                Download
-                            </Button>
-                        </Card.Body>
-                    </Card>
+                    <div className="col-4">
+                        <BookCards book={book} />
+                    </div>
                 ))}
-            </CardGroup>
+            </div>
             <Button variant="primary" onClick={() => setPage((page) => {
                 //on the last page, the next page will be the same as the current page
                 if (page < Math.ceil(books.length / booksPerPage)) {
