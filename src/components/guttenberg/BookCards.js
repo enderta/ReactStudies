@@ -5,25 +5,28 @@ import {Card} from "react-bootstrap";
 const BookCards = (props) => {
 
     return (
-        <div>
-            <Card className={"cards"}>
-                <Card.Title>{props.book.title}</Card.Title>
-                <Card.Img variant="top" src={`http://covers.openlibrary.org/b/id/${props.book.cover_i}-M.jpg`} />
 
 
 
-                <Card.Body className="d-flex justify-content-between">
-                        <Card.Text>
-                            {props.book.author_name}
+                <Card  key={props.book.key} className="cards" style={{ width: '18rem' }}>
+                    <Card.Img
 
-                        </Card.Text>
-                        <Card.Text>
-                            <a href={`https://openlibrary.org${props.book.key}`} target="_blank">Download</a>
-                        </Card.Text>
+                        src={`http://covers.openlibrary.org/b/id/${props.book.cover_i}-M.jpg`}
+                        style={{ height: '300px', objectFit: 'cover' }}
+                    />
+                    <Card.Body>
+                        <Card.Title>{props.book.title}</Card.Title>
+                    </Card.Body>
 
-                </Card.Body>
-            </Card>
-        </div>
+                        <Card.Text>{props.book.author_name}</Card.Text>
+                        <a href={`https://openlibrary.org${props.book.key}`} target="_blank">
+                            Download
+                        </a>
+
+                </Card>
+
+
+
     );
 };
 
