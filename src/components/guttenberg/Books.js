@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Button    } from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Card, Button} from 'react-bootstrap';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {faHome} from "@fortawesome/free-solid-svg-icons/faHome";
@@ -43,27 +43,22 @@ function Books() {
     return (
         <div>
             <form onSubmit={handleSearch}>
-                <input type="text" name="query" />
+                <input type="text" name="query"/>
                 <button type="submit">Search</button>
             </form>
             <div className="row">
-
-                        <BookCards books={pageBooks} />
-
+                <BookCards books={pageBooks}/>
             </div>
             <Button variant="primary" onClick={() => setPage((page) => {
                 //on the last page, the next page will be the same as the current page
                 if (page < Math.ceil(books.length / booksPerPage)) {
                     return page + 1;
-                }
-                else {
+                } else {
                     alert('You are on the last page');
                     return page;
                 }
-
-
             })}>
-               <FontAwesomeIcon icon={faArrowRight} color={'white'}/>
+                <FontAwesomeIcon icon={faArrowRight} color={'white'}/>
             </Button>
             <Button variant="primary" onClick={() => setPage((page) => 1)}>
                 <FontAwesomeIcon icon={faHome} color={'white'}/>
@@ -77,8 +72,6 @@ function Books() {
             })}>
                 <FontAwesomeIcon icon={faArrowLeft} color={'white'}/>
             </Button>
-
-
         </div>
     );
 }
