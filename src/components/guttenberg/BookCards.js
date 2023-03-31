@@ -7,9 +7,11 @@ const BookCards = (props) => {
     return (
         <div>
             <Card className={"cards"}>
-
+                <Card.Title>{props.book.title}</Card.Title>
                 <Card.Img variant="top" src={`http://covers.openlibrary.org/b/id/${props.book.cover_i}-M.jpg`} />
-                {console.log(`http://covers.openlibrary.org/b/id/${props.book.cover_i}-M.jpg`)}
+
+
+
                 <Card.Body className="d-flex justify-content-between">
                         <Card.Text>
                             {props.book.author_name}
