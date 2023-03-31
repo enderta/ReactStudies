@@ -35,7 +35,7 @@ function Books() {
         setPage((page) => page + 1);
     }
 
-    const booksPerPage = 6;
+    const booksPerPage = 5;
     const startIndex = (page - 1) * booksPerPage;
     const endIndex = startIndex + booksPerPage;
     const pageBooks = books.slice(startIndex, endIndex);
@@ -47,11 +47,9 @@ function Books() {
                 <button type="submit">Search</button>
             </form>
             <div className="row">
-                {pageBooks.map((book) => (
-                    <div className="col-4">
-                        <BookCards book={book} />
-                    </div>
-                ))}
+
+                        <BookCards books={pageBooks} />
+
             </div>
             <Button variant="primary" onClick={() => setPage((page) => {
                 //on the last page, the next page will be the same as the current page
