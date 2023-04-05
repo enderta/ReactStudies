@@ -13,6 +13,7 @@ const Pages = () => {
                 <Route path={"/"} element={<MainPage/>}/>
                 <Route path={"/all"} element={<ToDo/>}/>
                 <Route path={"/create"} element={<Create/>}/>
+
             </Routes>
 
         </div>
