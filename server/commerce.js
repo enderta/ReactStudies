@@ -11,11 +11,11 @@ const secret = "secret";
 app.use(cors());
 app.use(express.json());
 pool = new Pool({
-user: "postgres",
-host: "localhost",
-database: "commerce",
-password: "ender",
-port: 5432,
+    user: "postgres",
+    host: "localhost",
+    database: "commerce",
+    password: "ender",
+    port: 5432,
 });
 
 // register user
@@ -66,7 +66,12 @@ app.post(
                 message: "User created",
                 data: {
                     token,
-                    is_admin: rows[0].is_admin,
+                    id: rows[0].id,
+                    name: rows[0].name,
+                    email: rows[0].email,
+                    address: rows[0].address,
+                    phone: rows[0].phone,
+                    is_admin: rows[0].is_admin
                 },
             });
         } catch (err) {
@@ -144,18 +149,31 @@ app.get("/users", async (req, res) => {
         if (error) {
             res.status(401).json({ error: "Unauthorized" });
         } else {
-            if (decoded.user.is_admin) {
-                const { rows } = await pool.query(
-                    "SELECT * FROM users LIMIT 10 OFFSET $1",
-                    [(page-1)*10]
-                );
+            if (!decoded.user.is_admin) {
+                res.status(401).json({ error: "Unauthorized" });
+                return;
+            }
+
+            const searchTerm = req.query.search;
+            let query = "SELECT * FROM users";
+
+            if (searchTerm) {
+                const escapedSearchTerm = `%${searchTerm}%`;
+                query += " WHERE name ILIKE $1 OR email ILIKE $1";
+                const { rows } = await pool.query(query, [escapedSearchTerm]);
+                res.status(200).json({
+                    status: "success",
+                    message: `Users matching search term "${searchTerm}"`,
+                    data: rows,
+                });
+            } else {
+                query += " LIMIT 10 OFFSET $1";
+                const { rows } = await pool.query(query, [(page-1)*10]);
                 res.status(200).json({
                     status: "success",
                     message: "All users",
                     data: rows,
                 });
-            } else {
-                res.status(401).json({ error: "Unauthorized" });
             }
         }
     }
@@ -164,6 +182,6 @@ app.get("/users", async (req, res) => {
 
 
 app.listen(3001, () => {
-    console.log("Server started on port 3001");
+    console.log("Server is listening on port 3001");
 }
 );
