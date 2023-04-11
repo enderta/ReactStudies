@@ -140,7 +140,6 @@ app.post(
         }
     }
 );
-
 //only admin can get all users
 //10 users per page
 let page = 1;
@@ -151,9 +150,10 @@ app.get("/users", async (req, res) => {
             } else {
                 if (!decoded.user.is_admin) {
                     res.status(401).json({error: "Unauthorized"});
+
                     return;
                 }
-
+                console.log(decoded.user)
                 const searchTerm = req.query.search;
                 let query = "SELECT * FROM users";
 
@@ -327,6 +327,66 @@ app.delete("/users/:id", async (req, res) => {
         });
     }
 );
+
+app.get("/users/:id/orders", async (req, res) => {
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (!decoded.user.is_admin) {
+                res.status(401).json({error: "Unauthorized"});
+                return;
+            }
+            const {rows} = await pool.query(
+                //select o.total,o.order_date,u.name as "user_name",u.*,i.*,p.*,i.* from orders o join users u on o.user_id=u.id join order_items i on i.order_id=o.id join products p on i.product_id=p.id where u.id=1;
+                "SELECT o.total,o.order_date,u.name as \"user_name\",u.*,i.id as \"item_id\",i.product_id,i.quantity,i.price,p.*,u.id as \"user_id\" FROM orders o JOIN users u ON o.user_id=u.id JOIN order_items i ON i.order_id=o.id JOIN products p ON i.product_id=p.id WHERE u.id=$1",
+                [req.params.id]
+            );
+            if (rows.length === 0) {
+                res.status(404).json({
+                    status: "error",
+                    message: "orders not found",
+                });
+            } else {
+                res.status(200).json({
+                    status: "success",
+                    message: "orders found",
+                    data: rows,
+                });
+            }
+        }
+    });
+});
+
+app.get("/users/:id/orders/:order_id", async (req, res) => {
+    jwt.verify(req.headers.authorization, secret, async (error, decoded) => {
+        if (error) {
+            res.status(401).json({error: "Unauthorized"});
+        } else {
+            if (!decoded.user.is_admin) {
+                res.status(401).json({error: "Unauthorized"});
+                return;
+            }
+            const {rows} = await pool.query(
+                "SELECT o.total,o.order_date,o.id as \"order_id\",u.name as \"user_name\",u.*,i.id as \"item_id\",i.product_id,i.quantity,i.price,p.*,u.id as \"user_id\" FROM orders o JOIN users u ON o.user_id=u.id JOIN order_items i ON i.order_id=o.id JOIN products p ON i.product_id=p.id WHERE u.id=$1 AND o.id=$2",
+                [req.params.id, req.params.order_id]
+            );
+            if (rows.length === 0) {
+                res.status(404).json({
+                    status: "error",
+                    message: "order not found",
+                });
+            } else {
+                res.status(200).json({
+                    status: "success",
+                    message: "order found",
+                    data: rows,
+                });
+            }
+        }   
+    });
+});
+
 
 
 app.listen(3001, () => {
