@@ -1,6 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
-import BlogPost from "./schema.js";
+import User from "./schema.js";
 import connect from "./monconn.js";
 
 const app = express();
@@ -39,6 +39,7 @@ const insertUser = async (req, res) => {
         res.status(409).json({message:error.message});
     }
 }
+
 app.post("/api/user", insertUser);
 
 const getUsers = async (req, res) => {
@@ -63,7 +64,7 @@ const getUser = async (req, res) => {
         res.status(200).json({
             message:"User found",
             user:user
-        }
+        });
     }
     catch(error){
         res.status(404).json({message:error.message});

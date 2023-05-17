@@ -1,0 +1,15 @@
+
+
+http://localhost:5000/api/user
+
+###
+POST http://localhost:5000/api/user
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "jd@mail.com",
+  "picture": "https://png.pngtree.com/png-vector/20190710/ourmid/pngtree-user-vector-avatar-png-image_1541962.jpg",
+  "department": "IT"
+  }
+
