@@ -6,83 +6,101 @@ import connect from "./monconn.js";
 const app = express();
 app.use(express.json());
 connect();
-const insert = async (req, res) => {
-    const { title, content, author } = req.body;
-    const newPost = new BlogPost({
-        _id: new mongoose.Types.ObjectId(),
-        title,
-        content,
-        author,
-    });
-    try {
-        await newPost.save();
-        res.status(201).json(newPost);
-    } catch (error) {
-        res.status(409).json({ message: error.message });
+/*
+*  name:{
+         type:String,
+            required:true
+    },
+    email:{
+        type:String,
+        required:true,
+        unique:true
+   },
+    picture:{
+        type:String,
+        required:true
+    },
+    department:{
+        type:String,
+        required:true
     }
-};
+* */
 
-
-app.post("/posts", insert);
-
-const getPosts = async (req, res) => {
-    try {
-        const posts = await BlogPost.find();
-        res.status(200).json(posts);
-    } catch (error) {
-        res.status(404).json({ message: error.message });
+const insertUser = async (req, res) => {
+    const user =req.body;
+    try{
+        const newUser=await User.create(user);
+        res.status(201).json({
+            message:"User created successfully",
+            user:newUser
+        });
     }
-};
-
-app.get("/posts", getPosts);
-
-const getPost = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const post = await BlogPost.findById(id);
-        res.status(200).json(post);
+    catch(error){
+        res.status(409).json({message:error.message});
     }
-    catch (error) {
-        res.status(404).json({ message: error.message });
+}
+app.post("/api/user", insertUser);
+
+const getUsers = async (req, res) => {
+    try{
+        const users=await User.find();
+        res.status(200).json({
+            message:`${users.length} users found`,
+            users:users
+        });
+    }
+    catch(error){
+        res.status(404).json({message:error.message});
     }
 }
 
-app.get("/posts/:id", getPost);
+app.get("/api/user", getUsers);
 
-const updatePost = async (req, res) => {
-    const { id } = req.params;
-    const { title, content, author } = req.body;
-    try {
-        const post = await BlogPost.findById(id);
-        if (title) post.title = title;
-        if (content) post.content = content;
-        if (author) post.author = author;
-        await post.save();
-        res.status(200).json(post);
+const getUser = async (req, res) => {
+    const {id} = req.params;
+    try{
+        const user=await User.findById(id);
+        res.status(200).json({
+            message:"User found",
+            user:user
+        }
     }
-    catch (error) {
-        res.status(404).json({ message: error.message });
+    catch(error){
+        res.status(404).json({message:error.message});
     }
 }
 
-app.put("/posts/:id", updatePost);
+app.get("/api/user/:id", getUser);
 
-const deletePost = async (req, res) => {
-    const { id } = req.params;
-    try {
-        await BlogPost.findByIdAndRemove(id);
-        res.status(200).json({ message: "Post deleted successfully." });
+const updateUser = async (req, res) => {
+    const id=req.params.id;
+    const {name, email, picture, department} = req.body;
+    try{
+        const update=await User.fidbyIdAndUpdate(id, {name, email, picture, department}, {new:true});
+        res.status(200).json({
+            message:"User updated",
+            user:update
+        });
     }
-    catch (error) {
-        res.status(404).json({ message: error.message });
+    catch(error){   
+        res.status(404).json({message:error.message});
     }
 }
 
-app.delete("/posts/:id", deletePost);
+app.put("/api/user/:id", updateUser);
 
+const deleteUser = async (req, res) => {
+    const {id} = req.params;
+    try{
+        await User.findByIdAndDelete(id);
+        res.status(200).json({message:"User deleted"});
+    }
+    catch(error){
+        res.status(404).json({message:error.message});
+    }
+}
 
-
-
+app.delete("/api/user/:id", deleteUser);
 
 
 app.listen(5000, () => console.log("Server Running"));
